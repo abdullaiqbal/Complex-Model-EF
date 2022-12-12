@@ -1,21 +1,20 @@
 ﻿using ComplexModel.Data;
 using ComplexModel.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace ComplexModel.Controllers
+namespace ComplexModel.Areas.Administration.Controllers
 {
-    public class ItemController : Controller
+    public class OrderController : Controller
     {
         private readonly DatabaseContext _context;
-        public ItemController(DatabaseContext context)
+        public OrderController(DatabaseContext context)
         {
-            _context= context;
+            _context = context;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            var items = _context.Items.ToList();
+            var items = _context.Orders.ToList();
             return View(items);
         }
 
@@ -28,20 +27,20 @@ namespace ComplexModel.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
+            var item = _context.Orders.Where(x => x.OrderId == id).FirstOrDefault();
             return View(item);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
+            var item = _context.Orders.Where(x => x.OrderId == id).FirstOrDefault();
             return View(item);
         }
 
         public IActionResult Delete(int id)
         {
-            var item = _context.Items.Where(x => x.Id == id).FirstOrDefault();
+            var item = _context.Orders.Where(x => x.OrderId == id).FirstOrDefault();
             return View(item);
         }
 
@@ -51,25 +50,25 @@ namespace ComplexModel.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public IActionResult Create(Item model)
+        public IActionResult Create(Order model)
         {
-            _context.Items.Add(model);
+            _context.Orders.Add(model);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Edit(Item model)
+        public IActionResult Edit(Order model)
         {
-            _context.Items.Update(model);
+            _context.Orders.Update(model);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Delete(Item model)
+        public IActionResult Delete(Order model)
         {
-            _context.Items.Remove(model);
+            _context.Orders.Remove(model);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

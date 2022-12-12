@@ -4,8 +4,10 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        //public decimal? Price { get; set; }
         //public int TotalQuatity { get; set; }
+        //public virtual Unit Unit { get; set; }
+        //public int? UnitId_Fk { get; set; }
         public virtual ICollection<UnitItem>? UnitItems { get; set; } /*= new HashSet<UnitItem>();*/
         //public virtual Unit Unit { get; set; }
         //public int UnitId { get; set; }

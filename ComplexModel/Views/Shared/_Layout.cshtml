@@ -20,10 +20,41 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Administration
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="Administration" asp-controller="Item" asp-action="Index">Items</a></li>
+                                <li> <a class="dropdown-item" asp-area="Administration" asp-controller="Item" asp-action="RegisteredItems">Registered Items</a></li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="Administration" asp-controller="Unit" asp-action="Index">Units</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="Administration" asp-controller="Order" asp-action="Index">Orders</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                       @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Item" asp-action="Index">Items</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Item" asp-action="RegisteredItems">Registered Items</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Unit" asp-action="Index">Units</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Order" asp-action="Index">Orders</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>

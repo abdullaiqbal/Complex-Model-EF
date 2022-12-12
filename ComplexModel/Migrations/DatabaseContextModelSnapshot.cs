@@ -35,9 +35,6 @@ namespace ComplexModel.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,0)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Items");
@@ -115,6 +112,9 @@ namespace ComplexModel.Migrations
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("PricePerUnit")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quatity")
                         .HasColumnType("int");

@@ -31,10 +31,11 @@ namespace ComplexModel.Data
                         .Property(e => e.Name)
                         .IsRequired(true)
                         .HasMaxLength(50);
-            modelBuilder.Entity<Item>()
-                        .Property(e => e.Price)
-                        .IsRequired(true)
-                        .HasColumnType("decimal(18,0)");
+            //modelBuilder.Entity<Item>()
+            //            .Property(e => e.Price)
+            //            .IsRequired(true)
+            //            .HasColumnType("decimal(18,0)");
+            
 
             //Order
             modelBuilder.Entity<Order>()
@@ -96,6 +97,9 @@ namespace ComplexModel.Data
             modelBuilder.Entity<UnitItem>()
                         .Property(q => q.Quatity)
                         .IsRequired(true);
+            modelBuilder.Entity<UnitItem>()
+                       .Property(p => p.PricePerUnit)
+                       .IsRequired(true);
         }
         #endregion
 

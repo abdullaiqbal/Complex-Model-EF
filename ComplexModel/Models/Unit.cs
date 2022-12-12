@@ -12,6 +12,7 @@ namespace ComplexModel.Models
         [StringLength(50, MinimumLength = 2)]
         public string UnitType { get; set; }
         //// public virtual ICollection<Item> Items { get; set; }
+        //public ICollection<Item> items { get; set; }
         public virtual ICollection<UnitItem>? UnitItems { get; set; }
         public virtual ICollection<OrderedItem>? OrderedItems { get; set; }
 

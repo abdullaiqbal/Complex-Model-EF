@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ComplexModel.Controllers
+namespace ComplexModel.Areas.Administration.Controllers
 {
     public class HomeController : Controller
     {

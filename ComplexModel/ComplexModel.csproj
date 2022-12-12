@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Administration\Views\Shared\**" />
+    <Compile Remove="Views\Shared111\**" />
+    <Content Remove="Areas\Administration\Views\Shared\**" />
+    <Content Remove="Views\Shared111\**" />
+    <EmbeddedResource Remove="Areas\Administration\Views\Shared\**" />
+    <EmbeddedResource Remove="Views\Shared111\**" />
+    <None Remove="Areas\Administration\Views\Shared\**" />
+    <None Remove="Views\Shared111\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">

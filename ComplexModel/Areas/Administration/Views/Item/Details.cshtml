@@ -1,0 +1,125 @@
+﻿@model ComplexModel.Models.ViewModels.ItemDetailsVM
+
+@{
+    ViewData["Title"] = "Item Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+       @* <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>*@
+        @foreach (var u in Model.UnitItmes)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(unit => u.Unit.UnitType)
+                @*@Html.DisplayNameFor(model => model.UnitItmes)*@
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(unit => u.Unit.UnitType)
+                @*@Html.DisplayFor(model => model.Price)*@
+            </dd>
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(unit => u.Quatity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(unit => u.Quatity)  @Html.DisplayFor(unit => u.Unit.UnitType)
+            </dd>
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(unit => u.PricePerUnit)
+                @*@Html.DisplayNameFor(model => model.UnitItmes)*@
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(unit => u.PricePerUnit)
+                @*@Html.DisplayFor(model => model.Price)*@
+            </dd>
+
+            <dd>==================================================</dd>
+            @*@foreach (var u in Model.UnitItmes)
+                {
+                    @Html.DisplayNameFor(unit => u.Unit.UnitType)
+                    @* u.Unit.UnitType*@
+                @*@}*@
+
+            @*@Html.DisplayNameFor(unit => u.Unit.UnitType)*@
+            @* u.Unit.UnitType*@
+        }
+       
+        
+    </dl>
+</div>
+<div>
+    @{
+        var UnitItem = Model.UnitItmes;
+        
+    }
+    <a asp-action="Edit" asp-route-id="@Model?.ItemId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model ComplexModel.Models.Item
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+*@

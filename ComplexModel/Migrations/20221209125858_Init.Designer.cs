@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComplexModel.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221208124432_Init")]
+    [Migration("20221209125858_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -37,9 +37,6 @@ namespace ComplexModel.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,0)");
 
                     b.HasKey("Id");
 
@@ -118,6 +115,9 @@ namespace ComplexModel.Migrations
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("PricePerUnit")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quatity")
                         .HasColumnType("int");
