@@ -1,5 +1,6 @@
 ﻿using ComplexModel.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace ComplexModel.Models.ViewModels
 {
@@ -10,7 +11,7 @@ namespace ComplexModel.Models.ViewModels
         public ICollection<Item>? Items { get; set; }
         public int UnitId { get; set; }
         public ICollection<Unit>? Units { get; set; }
-        
+        public ICollection<UnitItem>? UnitItems { get; set; }
         public int Quantity { get; set; }
         //public Decimal PricePerUnit { get; set; }
 
@@ -41,8 +42,32 @@ namespace ComplexModel.Models.ViewModels
             return listItems;
         }
 
+        //public void SetUnits(int? id)
+        //{
+        //    //var units = from unit in UnitItems
+        //    //            where unit.ItemId == id
+        //    //            select new Unit
+        //    //            {
+        //    //                UnitId = unit.UnitId,
+        //    //                UnitType = unit.Unit.UnitType
+        //    //            };
+        //    if (id != null)
+        //    {
+        //        var units = from unit in UnitItems
+        //                    where unit.ItemId == id
+        //                    select new Unit
+        //                    {
+        //                        UnitId = unit.UnitId,
+        //                        UnitType = unit.Unit.UnitType
+        //                    };
+        //        var uniqueUnits = units.Distinct().ToList();
+        //        Units = uniqueUnits;
+        //    }
+           
+            
+        //} 
 
-        public IEnumerable<SelectListItem> CSelectListUnit(IEnumerable<Unit> Items)
+        public IEnumerable<SelectListItem>? CSelectListUnit(IEnumerable<Unit>? Items)
         {
             List<SelectListItem> listUnits = new List<SelectListItem>();
             SelectListItem Sli = new SelectListItem
@@ -51,17 +76,23 @@ namespace ComplexModel.Models.ViewModels
                 Value = "0"
             };
             listUnits.Add(Sli);
-            foreach (Unit item in Items)
+            if (Items != null)
             {
-                Sli = new SelectListItem
-                {
-                    Text = item.UnitType,
-                    Value = item.UnitId.ToString()
-                };
-                listUnits.Add(Sli);
 
-            }
+
+                foreach (Unit item in Items)
+                {
+                    Sli = new SelectListItem
+                    {
+                        Text = item.UnitType,
+                        Value = item.UnitId.ToString()
+                    };
+                    listUnits.Add(Sli);
+
+                }
             return listUnits;
+            }
+            return null;
         }
     }
 }

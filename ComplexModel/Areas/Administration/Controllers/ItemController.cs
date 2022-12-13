@@ -150,6 +150,20 @@ namespace ComplexModel.Areas.Administration.Controllers
 
         }
 
+
+        //[HttpPost]
+        public IActionResult DeleteItemDetails(int id)
+        {
+            var UnitItemDetails = _context.UnitItems.Where(ui=>ui.UnitId== id).FirstOrDefault();
+            _context.UnitItems.Remove(UnitItemDetails);
+            //_context.Items.Remove(model);
+            _context.SaveChanges();
+            //_context.Update(UnitItem);
+            return RedirectToAction("Index");
+        }
+
+
+
         [HttpPost]
         public IActionResult Edit(Item model)
         {

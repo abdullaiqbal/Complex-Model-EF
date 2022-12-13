@@ -51,6 +51,8 @@
                 @*@Html.DisplayFor(model => model.Price)*@
             </dd>
 
+            <dd> <a asp-action="DeleteItemDetails" asp-route-id="@u.UnitId">Delete</a></dd>
+
             <dd>==================================================</dd>
             @*@foreach (var u in Model.UnitItmes)
                 {
