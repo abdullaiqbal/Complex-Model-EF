@@ -6,27 +6,43 @@
 
 <h1>Index</h1>
 
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
 <p>
-    <a asp-area="Customer" asp-controller="CustomerOrder" asp-action="placeOrder">Place Order</a>
+    <a asp-area="Customer" asp-controller="CustomerOrder" asp-action="CreateOrder">Place Order</a>
 </p>
 
+@*<p>
+    <a asp-area="Administration" asp-controller="Order" asp-action="Create">Place Order</a>
+</p>*@
 
 
 <table class="table">
     <thead>
         <tr>
             <th>
-
-                Item Name
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Item Name</a>
+               @* Item Name*@
             </th>
             <th>
-                Price Per Unit
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price Per Unit</a>
+               @* Price Per Unit*@
             </th>
             <th>
-                Unit Type
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UnitTypeSortParm"]">Unit Type</a>
+               @* Unit Type*@
             </th>
             <th>
-                Total Quantity
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["QuantitySortParm"]">Total Quantity</a>
+                @*Total Quantity*@
             </th>
             @*<th>
             @Html.DisplayNameFor(model => model.UnitItems)

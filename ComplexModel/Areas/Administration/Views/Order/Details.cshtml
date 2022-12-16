@@ -1,4 +1,106 @@
-﻿@model ComplexModel.Models.Order
+﻿@*@model IEnumerable<ComplexModel.Models.OrderedItem>*@
+@model IEnumerable<ComplexModel.Models.ViewModels.OrderedItemsVM>
+
+@{
+    ViewData["Title"] = "OrderedItem";
+}
+
+<h1>OrderedItem</h1>
+
+<p>
+    @*<a asp-action="Create">Create New</a>*@
+    @*<h2>@Model</h2>*@
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+            Customer Names
+            @Html.DisplayNameFor(model => model.customerName)
+            </th>*@
+            <th>
+                @*Items*@
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitType)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Quantity)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerGuidKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sub_Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerGuidKey)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.customerName)
+            </td>*@
+                @* <td>
+            @Html.DisplayFor(modelItem => item.CustomerGuidKey)
+            </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Total)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @*@Html.ActionLink("Delete", "Delete", new {  item.OrderId,item.ItemId,item.UnitId  })*@
+                    <a asp-action="Delete" asp-route-id="{@item.OrderId,@item.ItemId,@item.UnitId}">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model ComplexModel.Models.Order
 
 @{
     ViewData["Title"] = "Details";
@@ -27,4 +129,4 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.OrderId">Edit</a> |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@

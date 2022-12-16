@@ -1,0 +1,25 @@
+﻿@model ComplexModel.Models.ViewModels.getUnitsVM
+@*<div class="col-md-4">
+<form asp-action="placeOrder">*@
+<div class="form-group">
+    Unit Type:
+
+    <label>Unit Type:</label>
+    <select asp-for="@Model.UnitId" asp-items="@Model.CSelectListUnit(@Model.Units.ToList())" class="form-control"></select>
+    <span asp-validation-for="@Model.UnitId" class="text-danger"></span>
+</div>
+@*<div class="form-group">
+                    <label asp-for="@Model.PricePerUnit" class="control-label"></label>
+                    <input asp-for="@Model.PricePerUnit" class="form-control" />
+                    <span asp-validation-for="@Model.PricePerUnit" class="text-danger"></span>
+                </div>*@
+<div class="form-group">
+    <label asp-for="@Model.Quantity" class="control-label"></label>
+    <input asp-for="@Model.Quantity" class="form-control" />
+    <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+</div>
+                  @*  <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                   </div>
+</form>
+        </div>*@

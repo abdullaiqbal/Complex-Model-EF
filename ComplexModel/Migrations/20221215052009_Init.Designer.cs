@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComplexModel.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221209125858_Init")]
+    [Migration("20221215052009_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -51,10 +51,17 @@ namespace ComplexModel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<DateTime>("OrderDate")
+                    b.Property<string>("CustomerGuidKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("TotalPrice")
+                    b.Property<decimal?>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId");
@@ -64,28 +71,32 @@ namespace ComplexModel.Migrations
 
             modelBuilder.Entity("ComplexModel.Models.OrderedItem", b =>
                 {
-                    b.Property<int?>("OrderId_FK")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemId_Fk")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UnitId_Fk")
+                    b.Property<int>("UnitId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<string>("CustomerGuidKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Sub_Total")
+                    b.Property<decimal?>("Sub_Total")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("customerName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrderId_FK", "ItemId_Fk", "UnitId_Fk");
+                    b.HasKey("OrderId", "ItemId", "UnitId");
 
-                    b.HasIndex("ItemId_Fk");
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("UnitId");
 
                     b.ToTable("OrderedItems");
                 });
@@ -133,19 +144,19 @@ namespace ComplexModel.Migrations
                 {
                     b.HasOne("ComplexModel.Models.Item", "Item")
                         .WithMany("OrderedItems")
-                        .HasForeignKey("ItemId_Fk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ComplexModel.Models.Unit", "Unit")
-                        .WithMany("OrderedItems")
-                        .HasForeignKey("ItemId_Fk")
+                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ComplexModel.Models.Order", "Order")
                         .WithMany("OrderItem")
-                        .HasForeignKey("OrderId_FK")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComplexModel.Models.Unit", "Unit")
+                        .WithMany("OrderedItems")
+                        .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

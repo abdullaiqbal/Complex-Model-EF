@@ -30,8 +30,10 @@ namespace ComplexModel.Migrations
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerGuidKey = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,31 +57,32 @@ namespace ComplexModel.Migrations
                 name: "OrderedItems",
                 columns: table => new
                 {
-                    OrderIdFK = table.Column<int>(name: "OrderId_FK", type: "int", nullable: false),
-                    ItemIdFk = table.Column<int>(name: "ItemId_Fk", type: "int", nullable: false),
-                    UnitIdFk = table.Column<int>(name: "UnitId_Fk", type: "int", nullable: false),
-                    customerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    SubTotal = table.Column<decimal>(name: "Sub_Total", type: "decimal(18,2)", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    UnitId = table.Column<int>(type: "int", nullable: false),
+                    customerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerGuidKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    SubTotal = table.Column<decimal>(name: "Sub_Total", type: "decimal(18,2)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderedItems", x => new { x.OrderIdFK, x.ItemIdFk, x.UnitIdFk });
+                    table.PrimaryKey("PK_OrderedItems", x => new { x.OrderId, x.ItemId, x.UnitId });
                     table.ForeignKey(
-                        name: "FK_OrderedItems_Items_ItemId_Fk",
-                        column: x => x.ItemIdFk,
+                        name: "FK_OrderedItems_Items_ItemId",
+                        column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderedItems_Orders_OrderId_FK",
-                        column: x => x.OrderIdFK,
+                        name: "FK_OrderedItems_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderedItems_Units_ItemId_Fk",
-                        column: x => x.ItemIdFk,
+                        name: "FK_OrderedItems_Units_UnitId",
+                        column: x => x.UnitId,
                         principalTable: "Units",
                         principalColumn: "UnitId",
                         onDelete: ReferentialAction.Cascade);
@@ -112,9 +115,14 @@ namespace ComplexModel.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderedItems_ItemId_Fk",
+                name: "IX_OrderedItems_ItemId",
                 table: "OrderedItems",
-                column: "ItemId_Fk");
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderedItems_UnitId",
+                table: "OrderedItems",
+                column: "UnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UnitItems_ItemId",

@@ -37,48 +37,42 @@ namespace ComplexModel.Data
             //            .HasColumnType("decimal(18,0)");
             
 
-            //Order
-            modelBuilder.Entity<Order>()
-                        .Property(e => e.OrderDate)
-                        .IsRequired(true);
-            modelBuilder.Entity<Order>()
-                        .Property(e => e.TotalPrice)
-                        .IsRequired(true);
+         
 
             //Unit
-            modelBuilder.Entity<Unit>()
-                        .Property(e => e.UnitType)
-                        .IsRequired(true)
-                        .HasMaxLength(50);
+            //modelBuilder.Entity<Unit>()
+            //            .Property(e => e.UnitType)
+            //            .IsRequired(true)
+            //            .HasMaxLength(50);
 
             //OrderedItem
             modelBuilder.Entity<OrderedItem>()
-                        .HasKey(k => new { k.OrderId_FK, k.ItemId_Fk, k.UnitId_Fk });
+                        .HasKey(k => new { k.OrderId, k.ItemId, k.UnitId });
             modelBuilder.Entity<OrderedItem>()
                         .HasOne(o => o.Order)
                         .WithMany(oi=>oi.OrderItem)
-                        .HasForeignKey(f=>f.OrderId_FK)
+                        .HasForeignKey(f=>f.OrderId)
                         .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<OrderedItem>()
                        .HasOne(i => i.Item)
                        .WithMany(oi => oi.OrderedItems)
-                       .HasForeignKey(f => f.ItemId_Fk)
+                       .HasForeignKey(f => f.ItemId)
                        .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<OrderedItem>()
                        .HasOne(u => u.Unit)
                        .WithMany(oi => oi.OrderedItems)
-                       .HasForeignKey(f => f.ItemId_Fk)
+                       .HasForeignKey(f => f.UnitId)
                        .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<OrderedItem>()
-                        .Property(c => c.customerName)
-                        .IsRequired(true);
-            modelBuilder.Entity<OrderedItem>()
-                        .Property(q => q.Quantity)
-                        .IsRequired(true);
-            modelBuilder.Entity<OrderedItem>()
-                        .Property(s => s.Sub_Total)
-                        .IsRequired(true);
+            //modelBuilder.Entity<OrderedItem>()
+            //            .Property(c => c.customerName)
+            //            .IsRequired(true);
+            //modelBuilder.Entity<OrderedItem>()
+            //            .Property(q => q.Quantity)
+            //            .IsRequired(true);
+            //modelBuilder.Entity<OrderedItem>()
+            //            .Property(s => s.Sub_Total)
+            //            .IsRequired(true);
 
 
             //UnitItem

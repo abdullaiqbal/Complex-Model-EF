@@ -7,13 +7,27 @@ namespace ComplexModel.Models.ViewModels
     public class CustomerOrderVM
     {
 
+        public int OrderId { get; set; }
         public int ItemId { get; set; }
-        public ICollection<Item>? Items { get; set; }
         public int UnitId { get; set; }
+        public ICollection<Item>? Items { get; set; }
         public ICollection<Unit>? Units { get; set; }
         public ICollection<UnitItem>? UnitItems { get; set; }
-        public int Quantity { get; set; }
+        public string? CustomerName { get; set; }
+        public int? Quantity { get; set; }
+        public string? CustomerGuidKey { get; set; }
+        public Decimal TotalPrice { get; set; }
         //public Decimal PricePerUnit { get; set; }
+
+
+        //Collections
+        //public List<int>? ItemIds { get; set; }
+        ////public ICollection<Item> Items { get; set; }
+        //public List<int>? UnitIds { get; set; }
+        ////public ICollection<Unit> Units { get; set; }
+
+        //public List<int>? Quatities { get; set; }
+
 
 
 
