@@ -57,6 +57,8 @@ namespace ComplexModel.Migrations
                 name: "OrderedItems",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false),
@@ -67,7 +69,7 @@ namespace ComplexModel.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderedItems", x => new { x.OrderId, x.ItemId, x.UnitId });
+                    table.PrimaryKey("PK_OrderedItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_OrderedItems_Items_ItemId",
                         column: x => x.ItemId,
@@ -118,6 +120,11 @@ namespace ComplexModel.Migrations
                 name: "IX_OrderedItems_ItemId",
                 table: "OrderedItems",
                 column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderedItems_OrderId",
+                table: "OrderedItems",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderedItems_UnitId",

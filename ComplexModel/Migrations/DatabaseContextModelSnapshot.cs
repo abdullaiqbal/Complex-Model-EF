@@ -68,17 +68,20 @@ namespace ComplexModel.Migrations
 
             modelBuilder.Entity("ComplexModel.Models.OrderedItem", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CustomerGuidKey")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UnitId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
-
-                    b.Property<string>("CustomerGuidKey")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
@@ -86,12 +89,17 @@ namespace ComplexModel.Migrations
                     b.Property<decimal?>("Sub_Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("UnitId")
+                        .HasColumnType("int");
+
                     b.Property<string>("customerName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrderId", "ItemId", "UnitId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ItemId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("UnitId");
 

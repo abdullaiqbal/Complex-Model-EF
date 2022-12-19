@@ -46,8 +46,8 @@ namespace ComplexModel.Data
             //            .HasMaxLength(50);
 
             //OrderedItem
-            modelBuilder.Entity<OrderedItem>()
-                        .HasKey(k => new { k.OrderId, k.ItemId, k.UnitId });
+            //modelBuilder.Entity<OrderedItem>()
+            //            .HasKey(k => new { k.OrderId, k.ItemId, k.UnitId });
             modelBuilder.Entity<OrderedItem>()
                         .HasOne(o => o.Order)
                         .WithMany(oi=>oi.OrderItem)

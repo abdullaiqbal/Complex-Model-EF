@@ -77,6 +77,21 @@ namespace ComplexModel.Areas.Administration.Controllers
             return View(item);
         }
 
+        [HttpGet]
+        public IActionResult EditItems(int id)
+        {
+          
+            OrderedItem item = _context.OrderedItems.Where(oi => oi.Id == id).FirstOrDefault();
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult EditItems(OrderedItem model)
+        {
+            _context.OrderedItems.Update(model);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
 
         [HttpGet]
@@ -86,18 +101,37 @@ namespace ComplexModel.Areas.Administration.Controllers
             return View(item);
         }
 
-        //[HttpGet]
-        //public IActionResult DeleteOrderedItem(List<int> id)
-        //{
-        //    //var item = _context.Orders.Where(x => x.OrderId == id).FirstOrDefault();
-        //    var OItem = _context.OrderedItems.Where(oi => oi.OrderId)
-            
-        //    return View(OItem);
-        //}
 
-        //{
-        //    (int OrderId, int ItemId, int UnitId) value = (oi.OrderId, oi.ItemId, oi.UnitId);
-        //    return new int() { value. };
+
+        [HttpGet]
+        public IActionResult DeleteOrderedItems(int id)
+        {
+            //var item = _context.Orders.Where(x => x.OrderId == id).FirstOrDefault();
+            var OItem = _context.OrderedItems.Where(oi => oi.OrderId ==id).ToList();
+
+
+            return View(OItem);
+        }
+
+
+        //[HttpPost]
+        public IActionResult DeleteSingleOrderItem(int id)
+        {
+            
+            var item = _context.OrderedItems.Where(oi=>oi.Id == id).FirstOrDefault();   
+            var order = _context.Orders.Where(o=>o.OrderId ==item.OrderId).FirstOrDefault();
+            var totalPrice = order.TotalPrice;
+            totalPrice = totalPrice - item.Sub_Total;
+            order.TotalPrice = totalPrice;
+            _context.Orders.Update(order);
+            _context.OrderedItems.Remove(item);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //        {
+        //            (int OrderId, int ItemId, int UnitId) value = (oi.OrderId, oi.ItemId, oi.UnitId);
+        //            return new int () { value. };
         //})
 
         //[HttpPost]

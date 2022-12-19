@@ -1,7 +1,12 @@
-﻿namespace ComplexModel.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ComplexModel.Models
 {
     public class OrderedItem
     {
+        [Key]
+        public int Id { get; set; }
+       
         public Order Order { get; set; }
         public int OrderId { get; set; }
 
