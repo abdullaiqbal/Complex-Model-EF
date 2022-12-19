@@ -88,7 +88,20 @@ namespace ComplexModel.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult EditItems(OrderedItem model)
         {
+            var order = _context.Orders.Where(o=>o.OrderId == model.OrderId ).FirstOrDefault();
             _context.OrderedItems.Update(model);
+            _context.SaveChanges();
+            List<OrderedItem> oi = _context.OrderedItems.Where(o=>o.OrderId ==model.OrderId && o.ItemId==model.ItemId && o.UnitId == model.UnitId).ToList();
+            decimal? totalPrice = 0;
+            if (oi != null)
+            {
+                foreach(var i in oi)
+                {
+                    totalPrice = totalPrice + i.Sub_Total;
+                }
+            }
+            order.TotalPrice = totalPrice;
+            _context.Orders.Update(order);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
