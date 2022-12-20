@@ -3,6 +3,7 @@ using ComplexModel.Models;
 using ComplexModel.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace ComplexModel.Areas.Administration.Controllers
 {
@@ -89,9 +90,34 @@ namespace ComplexModel.Areas.Administration.Controllers
         public IActionResult EditItems(OrderedItem model)
         {
             var order = _context.Orders.Where(o=>o.OrderId == model.OrderId ).FirstOrDefault();
+            //order.TotalPrice = order.TotalPrice - model.Sub_Total;
+            var quantity = model.Quantity;
+            var unitItem = _context.UnitItems.Where(ui => ui.ItemId == model.ItemId && ui.UnitId == model.UnitId).FirstOrDefault();
+            var pricePerUnit = unitItem.PricePerUnit;
+            var subTotal = pricePerUnit * quantity;
+            model.Sub_Total = subTotal;
+            if (model.customerName != null)
+            {
+                order.CustomerName = model.customerName;
+               //List<OrderedItem> orderedItem = _context.OrderedItems.Where(oi => oi.OrderId == order.OrderId).ToList();
+               //for (int i = 0;i<orderedItem.Count(); i++)
+               // {
+               //     if (orderedItem[i].Id != model.Id)
+               //     {
+               //         orderedItem[i].customerName = model.customerName;
+               //         _context.OrderedItems.Update(orderedItem[i]);
+               //         _context.SaveChanges();
+               //     }
+               // }
+               
+            }
+            //var orderedItemId = model.Id;
+            
+           
             _context.OrderedItems.Update(model);
             _context.SaveChanges();
-            List<OrderedItem> oi = _context.OrderedItems.Where(o=>o.OrderId ==model.OrderId && o.ItemId==model.ItemId && o.UnitId == model.UnitId).ToList();
+            
+            List<OrderedItem> oi = _context.OrderedItems.Where(o=>o.OrderId ==model.OrderId).ToList();
             decimal? totalPrice = 0;
             if (oi != null)
             {
